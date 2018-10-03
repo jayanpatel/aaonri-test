@@ -1,0 +1,228 @@
+<!-- multistep form -->
+<form #registrationForm="ngForm" class="signupForm" (ngSubmit)="OnSubmit(registrationForm)">
+  <div class="form-group">
+    <!-- progressbar -->
+    <ul id="progressbar">
+      <li class="active">Personal Details</li>
+      <li [ngClass]="currentStep>1?'active':'inactive'">More Details</li>
+      <li [ngClass]="currentStep>2?'active':'inactive'">Your Interests</li>
+      <!-- <li [ngClass]="{'active':currentStep>2}">Newsletter</li> -->
+    </ul>
+    <!-- fieldsets -->
+    <fieldset [hidden]="!firstStep">
+      <h2 class="fs-title">Join aaonri Community</h2>
+      <h3 class="fs-subtitle">Step 1</h3>
+      <input type="text" name="firstName" #FirstName="ngModel" [(ngModel)]="user.firstName" placeholder="First Name"
+        required minlength="3" value="{{slFirstName}}"/>
+      <div *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)">
+        <div *ngIf="FirstName.errors.required">
+          <small class="text-danger validation-messages">First Name is required.</small>
+        </div>
+        <div *ngIf="FirstName.errors.minlength">
+          <small class="text-danger validation-messages">First Name must be at least 3 characters long.</small>
+        </div>
+      </div>
+      <input type="text" class="validate" name="lastName" #LastName="ngModel" [(ngModel)]="user.lastName" placeholder="Last Name"
+        required minlength="3" value="{{slLastName}}"/>
+      <div *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)">
+        <div *ngIf="LastName.errors.required">
+          <small class="text-danger validation-messages">Last Name is required.</small>
+        </div>
+        <div *ngIf="LastName.errors.minlength">
+          <small class="text-danger validation-messages">Last Name must be at least 3 characters long.</small>
+        </div>
+      </div>
+      <input type="text" name="emailId" #Email="ngModel" [(ngModel)]="user.emailId" [pattern]="emailPattern"
+        placeholder="Email" required value="{{slEmail}}"/>
+      <div *ngIf="Email.invalid && (Email.dirty || Email.touched)">
+        <div *ngIf="Email.errors.required">
+          <small class="text-danger validation-messages">Email is required.</small>
+        </div>
+        <div *ngIf="Email.errors.pattern">
+          <small class="text-danger validation-messages">Not a valid Email ID.</small>
+        </div>
+      </div>
+      <input type="password" name="password" #Password="ngModel" [(ngModel)]="user.password" required minlength="3"
+        validateEqual="cPassword" reverse="true" placeholder="Set Password" />
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)">
+        <div *ngIf="Password.errors.required">
+          <small class="text-danger validation-messages">Password is required.</small>
+        </div>
+        <div *ngIf="Password.errors.minlength">
+          <small class="text-danger validation-messages">Password must be at least 3 characters long.</small>
+        </div>
+      </div>
+      <input type="password" name="cPassword" #confirmPassword="ngModel" [(ngModel)]="cPassword" required validateEqual="password"
+        placeholder="Confirm Password" />
+      <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        <div *ngIf="confirmPassword.errors">
+          <small class="text-danger validation-messages">Password mismatch.</small>
+        </div>
+      </div>
+      <div *ngIf="emailErrorMsg" class="d-flex float-left checkbox-with-label check-newsletter emailErrMsg">
+          <small class="text-danger validation-messages">Entered Email Id already exists!</small>
+      </div>
+      <input type="button" [disabled]="FirstName.invalid || LastName.invalid || Email.invalid || Password.invalid || confirmPassword.invalid"
+        name="next" [ngClass]="FirstName.invalid || LastName.invalid || Email.invalid || Password.invalid || confirmPassword.invalid ? 'next action-button-disabled' : 'next action-button'"
+        value="Next" (click)="stepSubmit('2', registrationForm)" />
+        <!-- Facebook Login -->
+        <button id="fb_button" (click)="socialSignIn('facebook')">
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <defs>
+              <style>.cls-1{fill:#4267b2;}.cls-2{fill:#fff;}</style>
+            </defs>
+            <title>flogo_RGB_HEX-512</title>
+            <path class="cls-1" d="M483.74,0H28.26A28.26,28.26,0,0,0,0,28.26V483.74A28.26,28.26,0,0,0,28.26,512H273.5V314H207V236.5h66.5v-57c0-66.13,40.39-102.14,99.38-102.14,28.25,0,52.54,2.1,59.62,3v69.11l-40.68,0c-32.1,0-38.32,15.25-38.32,37.64V236.5h76.74l-10,77.5H353.5V512H483.74A28.26,28.26,0,0,0,512,483.74V28.26A28.26,28.26,0,0,0,483.74,0Z"/>
+            <path id="f" class="cls-2" d="M353.5,512V314h66.75l10-77.5H353.5V187.14c0-22.39,6.22-37.64,38.32-37.64l40.68,0V80.37c-7.08-.94-31.37-3-59.62-3-59,0-99.38,36-99.38,102.14v57H207V314h66.5V512Z"/>
+          </svg>
+          Sign in with Facebook
+        </button>
+        <!-- Google Login -->
+        <button id="gg_button" (click)="socialSignIn('google')">
+          <div class="g-button">
+            <svg id="Layer_2" version="1.1" xmlns="http://www.w3.org/2000/svg" width="29px" height="29px" viewBox="0 0 48 48" class="abcRioButtonSvg">
+              <g>
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                <path fill="none" d="M0 0h48v48H0z"></path>
+              </g>
+            </svg>
+          </div>
+          Sign in with Google
+        </button>
+        <!-- <div id="my-signin2" style="height: 50px; width: 150px;"></div>
+        <script>
+          function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+          }
+          function onFailure(error) {
+            console.log(error);
+          }
+          function renderButton() {
+            gapi.signin2.render('my-signin2', {
+              'scope': 'profile email',
+              'longtitle': true,
+              'theme': 'dark',
+              'onsuccess': onSuccess,
+              'onfailure': onFailure
+            });
+          }
+        </script> -->
+        <!-- <fb:login-button
+          class="fb-signin2"
+          scope="public_profile,email"
+          onlogin="checkLoginState();"
+          autologoutlink="true"
+          size="large"
+          button-type="continue_with"
+          style="margin: 0 auto; text-align: center; width: 150px; height: 50px; background-color: #4167b2;">
+        </fb:login-button> -->
+
+        <!-- <script type="text/javascript">
+          function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            $("input[name='email']").value = profile.getEmail();
+          }
+        </script> -->
+    </fieldset>
+
+    <fieldset [hidden]="!secondStep">
+      <h2 class="fs-title">We need some details</h2>
+      <h3 class="fs-subtitle">Step 2</h3>
+      <input type="text" num-format name="phoneNo" #PhoneNo="ngModel" [(ngModel)]="user.phoneNo" (ngModelChange)="user.phoneNo=$event"
+        placeholder="Phone Number" [pattern]="phonePattern" required />
+      <div *ngIf="PhoneNo.invalid && (PhoneNo.dirty || PhoneNo.touched)">
+        <div *ngIf="PhoneNo.errors.required">
+          <small class="text-danger validation-messages">Phone Number is required.</small>
+        </div>
+        <div *ngIf="PhoneNo.errors.pattern">
+          <small class="text-danger validation-messages">Not a valid Phone Number.</small>
+        </div>
+      </div>
+      <input type="text" name="address1" #Address1="ngModel" [(ngModel)]="user.address1" placeholder="Address Line 1"
+        required />
+      <div *ngIf="Address1.invalid && (Address1.dirty || Address1.touched)">
+        <div *ngIf="Address1.errors.required">
+          <small class="text-danger validation-messages">Address Line is required.</small>
+        </div>
+      </div>
+      <input type="text" name="address2" #Address2="ngModel" [(ngModel)]="user.address2" placeholder="Address Line 2" />
+      <input type="text" name="city" #City="ngModel" [(ngModel)]="user.city" placeholder="City" required />
+      <div *ngIf="City.invalid && (City.dirty || City.touched)">
+        <div *ngIf="City.errors.required">
+          <small class="text-danger validation-messages">City is required.</small>
+        </div>
+      </div>
+      <input type="text" name="state" #State="ngModel" [(ngModel)]="user.state" placeholder="State" required />
+      <div *ngIf="State.invalid && (State.dirty || State.touched)">
+        <div *ngIf="State.errors.required">
+          <small class="text-danger validation-messages">State is required.</small>
+        </div>
+      </div>
+      <input type="text" name="zipcode" #ZipCode="ngModel" [(ngModel)]="user.zipcode" placeholder="Zip Code" required />
+      <div *ngIf="ZipCode.invalid && (ZipCode.dirty || ZipCode.touched)">
+        <div *ngIf="ZipCode.errors.required">
+          <small class="text-danger validation-messages">Zip Code is required.</small>
+        </div>
+      </div>
+      <input type="text" placeholder="Country of Origin" />
+      <input type="button" name="previous" class="previous action-button" value="Previous" (click)="stepPrevious('1')" />
+      <input type="button" name="next" [disabled]="Address1.invalid || City.invalid || State.invalid || ZipCode.invalid"
+        [ngClass]="Address1.invalid || City.invalid || State.invalid || ZipCode.invalid ? 'next action-button-disabled' : 'next action-button'"
+        value="Next" (click)="stepSubmit('3')" />
+    </fieldset>
+    <fieldset [hidden]="!thirdStep">
+      <h2 class="fs-title">Your Interests</h2>
+      <h3 class="fs-subtitle">Choose any three or more</h3>
+
+      <div class="whiteText" *ngFor="let interest of interests; let i = index">
+        <div class="row checkbox-wrapper ">
+          <div class="col">
+            <div class="d-flex float-left checkbox-with-label">
+              <input type="checkbox" class="test" value = {{i}} (input) = "cbChange($event.target.value)">
+              <label class="form-check-label" for="inlineCheckbox1">{{interest.interestDesc}}</label>
+            </div>
+          </div>
+          <div *ngIf="index / 2 == 0" class="w-100"></div>
+        </div>
+      </div>
+      <div class="col whiteText">
+        <div class="d-flex float-left checkbox-with-label check-newsletter">
+          <input type="checkbox" class="test" id="newsletter" name="newsletter" #Newsletter="ngModel" [(ngModel)]="user.newsletter">
+          <label class="form-check-label check-newsletter-label" for="newsletter">Subscribe to the AAONRI
+            newsletter and get latest
+            updates on our services.</label>
+        </div>
+      </div>
+      <input type="button" name="previous" class="previous action-button" value="Previous" (click)="stepPrevious('2')" />
+      <!-- <input type="submit" name="submit" class="submit action-button" data-toggle="modal" data-target="#exampleModalLong" value="Submit" (click)='open(content)' /> -->
+      <button [disabled]="!registrationForm.valid || checkedServices < 3" [ngClass]="!registrationForm.valid || checkedServices < 3 ? 'action-button-disabled' : 'action-button'"
+        type="submit">Submit</button>
+    </fieldset>
+
+    <!-- Modal -->
+
+  </div>
+</form>
+<!-- <div class="modal-style">
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Welcome!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Hello, Raghav! Welcome to AANRI. We are looking forward to serve you with the best of our services to help you feel as if you are in your home country.</p>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Save click')">Click here to continue</button>
+    </div>
+  </ng-template>
+</div> -->

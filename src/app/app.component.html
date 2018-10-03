@@ -1,0 +1,145 @@
+ <!-- <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head> -->
+
+<!-- <div style="text-align:center;margin-top:90px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div> -->
+<!-- </html> -->
+
+<header>
+    <div class="transbg" id="transbg">
+      <div class="container bardiv">
+        <div class="col-md-6">
+          <div class="logo-box">
+            <a [routerLink] ="['']"><img src="../assets/img/logo.png" height="45px"/></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="menubr text-right">
+            <nav>
+            <a href="#" id="menu-icon"></a>
+            <ul class="mynav">
+            <li><a href="#" class="current">Post Ads</a></li>
+            <li><a [routerLink]="['signin']">Member Area</a></li>
+            <li><a [routerLink]="['signup']">Join Us</a></li>  
+            </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div><div class="clearfix"></div>
+    </div> <!-- transbg end here -->
+    <!-- <div class="row">
+      <div class="slider">
+        <div class="banner-box">
+          <div class="heading-txt">BRINGING THE ENTIRE <span>COMMUNITIES TOGETHER</span></div>
+          <form class="classified-search">
+            <input type="text" class="search-field"  id="search-field" name="location" placeholder="Location" >
+            <input type="text" class="search-field"  id="search-field" name="Services" placeholder="Services" >
+            <input type="submit" class="search-field"  id="search-field" name="submit" value="Search">
+          </form>
+        </div>
+      </div>
+    </div> -->
+    <!-- row end here -->
+  </header>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+			<!-- <div class="row"> -->
+					<div class="container">
+						<div class="col-md-9">
+							<div class="footer-text-box">
+								<h3>Page Links</h3>
+								<div class="foot-links-txt">
+									<a href="#">About us</a>, 
+									<a href="#">Contact Us</a>, 
+									<a href="#">Privacy Policy</a>, 
+									<a href="#">Terms and Conditions</a>, 
+									<a href="#">Career</a>, 
+									<a href="#">Site Map</a>, 
+									<a href="#">Other pages</a>
+								</div>
+							</div>
+							<div class="footer-text-box">
+								<h3>Popular City</h3>
+								<div class="foot-links-txt">
+									<a href="#">New York</a>, 
+									<a href="#">Los Angles</a>, 
+									<a href="#">Detroit</a>, 
+									<a href="#">Denver</a>, 
+									<a href="#">New Jerrsy</a>, 
+									<a href="#">Bostan</a>, 
+									<a href="#">Washington</a>, 
+									<a href="#">Seattle</a>, 
+									<a href="#">Dallas</a>
+								</div>
+							</div>
+							<div class="footer-text-box">
+								<h3>Disclaimer</h3>
+								<div class="foot-links-txt">
+									<p href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="lft-brdr row">
+								<div class="col-md-12 ">
+									<div class="logo-foot">
+										<img src="../assets/img/logo.png" class="img-responsive">
+									</div>
+									<div class="social-box">
+										<div class="social-head">
+											<div class="follow-us">Follow Us:</div>
+											<ul class="social-icons">
+												<li><a href=""><i class="fab fa-twitter"></i></a></li>
+												<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+												<li><a href=""><i class="fab fa-instagram"></i></a></li>
+												<li><a href=""><i class="fab fa-youtube"></i></a></li>
+												<li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+											</ul>
+										</div>
+									</div><div class="clearfix"></div>
+									<div class="copy-text-box">
+										 &copy; copyright text comes here.
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+			<!-- </div> -->
+		</footer>
+
+  <!-- <script>
+			// -------- sticky navbar js ------------------//
+			window.onscroll = function() {myFunction()};
+
+			var navbar = document.getElementById("transbg");
+			var sticky = navbar.offsetTop;
+			
+			
+				
+			function myFunction() {
+        alert("hello");
+			  if (window.pageYOffset >= 10) {
+				navbar.classList.add("sticky")
+				navbar.classList.add("lightHeader");
+			  } else {
+				navbar.classList.remove("sticky");
+				navbar.classList.remove("lightHeader");
+			  }
+			}
+			// -------- fade text random js ------------------//
+		
+				
+
+		</script> -->

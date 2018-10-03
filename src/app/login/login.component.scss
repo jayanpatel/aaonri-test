@@ -1,0 +1,209 @@
+/*custom font*/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+/*basic reset*/
+
+
+html {
+	height: 100%;
+	// background: 
+	// 	linear-gradient(rgba(91, 187, 250, 0.6), rgba(0, 255, 242, 0.6));
+}
+
+body {
+	font-family: montserrat, arial, verdana;
+	background-color: transparent !important;
+}
+/*form styles*/
+.signupForm {
+	width: 400px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+.signupForm fieldset {
+	background: #02448f;
+	border: 0 none;
+	border-radius: 7px;
+	box-shadow: 0 0 15px 1px rgb(2,68,143);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0 0%;
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+.signupForm fieldset:not(:second-of-type) {
+	display: none;
+}
+/*inputs*/
+.signupForm input, .signupForm textarea, .signupForm button {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+.signupForm .action-button {
+	width: 100px;
+	background: rgb(149, 183, 255);
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 0px 10px 0px 10px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.signupForm .action-button-disabled {
+	width: 100px;
+	background: rgba(158, 160, 158, 0.993);
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 0px 10px 0px 10px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+.signupForm .action-button:hover, .signupForm .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+
+.modal-style{
+	font-family: montserrat;
+	padding:4px !important;
+	height:100px !important;
+}
+.signupForm .test{
+    width:auto !important;
+    margin: 5px 0px !important;
+    align-self:  left !important;
+}
+
+
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	color: #ffffff;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #fff;
+    margin-bottom: 20px;
+}
+.checkbox-with-label{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    font-family: montserrat, arial, verdana;
+    font-size: 13px;
+    margin: 0 0 10px;
+    >label {
+        margin: 0 0 0 10px;
+    }
+}
+
+.parent-checkboxes{
+    display: flex;
+    flex-direction: column;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}
+
+.signin-form{
+    display:flex;
+    width: 100%;
+    margin-top: 135px;
+}
+
+.validation-messages{
+	padding: 0px 0px 4px !important;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: flex;
+	flex-direction: row;
+	font-size: 11px
+}
+
+@-webkit-keyframes spaceboots {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shakeItOff {
+	-webkit-animation-name: spaceboots;
+	-webkit-animation-duration: 0.1s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-iteration-count:3;
+	-webkit-animation-timing-function: linear;
+}
+
+
+
+

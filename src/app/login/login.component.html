@@ -1,0 +1,31 @@
+<form #signinForm="ngForm" class="signupForm" (ngSubmit)="OnSubmit(signinForm)" >
+    <div class="form-group signin-form">
+      <!-- fieldsets -->
+
+
+    <fieldset [ngClass] = "formInvalid ? 'shakeItOff' : ''">
+      <h2 class="fs-title">Please Log In Here</h2>
+      <input type="text" name="emailId" #Email="ngModel" [(ngModel)]="user.emailId" [pattern]="emailPattern" placeholder="Email" required />
+      <div *ngIf="Email.invalid && (Email.dirty || Email.touched)">
+          <div *ngIf="Email.errors.required">
+              <small class="text-danger validation-messages">Email is required.</small>
+          </div>
+          <div *ngIf="Email.errors.pattern">
+              <small class="text-danger validation-messages">Not a valid Email ID.</small>
+          </div>
+      </div>
+      <input type="password" name="password"  #Password="ngModel" [(ngModel)]="user.password" required minlength="3" validateEqual="cPassword" reverse="true" placeholder="Password" />
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)">
+          <div *ngIf="Password.errors.required">
+              <small class="text-danger validation-messages">Password is required.</small>
+          </div>
+          <div *ngIf="Password.errors.minlength">
+              <small class="text-danger validation-messages">Password must be at least 3 characters long.</small>
+          </div>
+      </div>
+      <div *ngIf="formInvalid">
+          <small class="text-danger validation-messages">Please enter correct Email Id and password.</small>
+      </div>
+      <button [disabled]="!signinForm.valid" [ngClass]="!signinForm.valid ? 'action-button-disabled' : 'action-button'" type="submit">Submit</button>
+      
+    </fieldset>

@@ -1,0 +1,48 @@
+<!-- multistep form -->
+<form #signinForm="ngForm" class="signupForm" (ngSubmit)="OnSubmit(signinForm)" >
+    <div class="form-group">
+    <!-- fieldsets -->
+    <fieldset>
+      <h2 class="fs-title">Signin to your account</h2>
+      <input type="text" name="emailId" #Email="ngModel" [(ngModel)]="user.emailId" [pattern]="emailPattern" placeholder="Email/Username" required />
+      <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="alert alert-danger" >
+          <div *ngIf="Email.errors.required">Email is required.</div>
+          <div *ngIf="Email.errors.pattern"> Not a valid Email ID.</div>
+      </div>
+      <input type="password" name="password"  #Password="ngModel" [(ngModel)]="user.password" required minlength="3" validateEqual="cPassword" reverse="true" placeholder="Enter Password" />
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger" >
+          <div *ngIf="Password.errors.required">Password is required.</div>
+          <div *ngIf="Password.errors.minlength">Password must be at least 3 characters long.</div>
+      </div>
+      
+      <div class="parent-checkboxes">
+            <div class="d-flex float-left checkbox-with-label">
+                <input  type="checkbox"  class="test" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">Remember me on this computer</label>
+            </div>
+       </div>
+       <input type="button" name="cancel" class="previous action-button" value="Cancel" (click)="cancel" />
+       <button [disabled]="!signinForm.valid" [ngClass]="!signinForm.valid ? 'action-button-disabled' : 'action-button'" type="submit">Submit</button>
+    </fieldset>
+
+<!-- Modal -->
+
+</div>
+  </form>
+  <div class="modal-style">
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Welcome!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Hello, Raghav! Welcome to AANRI. We are looking forward to serve you with the best of our services to help you feel as if you are in your home country.</p>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Save click')">Click here to continue</button>
+    </div>
+  </ng-template>
+</div>
